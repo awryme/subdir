@@ -12,12 +12,12 @@ func (dir Dir) String() string {
 	return string(dir)
 }
 
-func New(path string) (Dir, error) {
+func New(path string, perm fs.FileMode) (Dir, error) {
 	fullpath, err := filepath.Abs(path)
 	if err != nil {
 		return "", err
 	}
-	err = os.MkdirAll(fullpath, os.ModeDir)
+	err = os.MkdirAll(fullpath, perm)
 	if err != nil {
 		return "", err
 	}
